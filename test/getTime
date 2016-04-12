@@ -1,0 +1,27 @@
+#! /bin/bash
+
+# 默认当前日期
+nowDate=$(date +%Y/%m/%d)
+# 默认当前时间
+nowTime=$(date +%H:%M)
+
+read -p "输入日期($nowDate):" localDateStr
+read -p "输入时间($nowTime):" localTimeStr
+
+# 默认值获取
+# 在对应的值为空时,取默认值
+localDateStr="${localDateStr:-$nowDate}"
+localTimeStr="${localTimeStr:-$nowTime}"
+
+# 用来处理时间是否合法
+# 通过 > /dev/null 2>&1 来控制不输出到shell界面
+date -d "$localDateStr $localTimeStr" > /dev/null 2>&1
+
+
+# 如果时间合法,则显示出来
+if [ "&?" = "0" ]
+then
+	echo $localDateStr $localTimeStr
+else 
+	echo "您输入的时间不合法"
+fi
