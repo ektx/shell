@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Case 的练习
+# 使用方式: ./case
+
+# 如果无法运行,使用: chmod +x case
+
+echo '输入 1 到 4 之间的数字:'
+echo '你输入的数字为:'
+
+read zNum
+case $zNum in
+	1) echo '你选择的是 1'
+	;;
+	2) echo '你选择的是 2'
+	;;
+	3) echo '你选择的是 3'
+	;;
+	4) echo '你选择的是 4'
+	;;
+	*) echo '你没有输入1 到 4 之间的数字!'
+	;;
+esac
