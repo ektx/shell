@@ -1,15 +1,9 @@
 # shell awk
 
-### 目录
-- [简介](#简介)
-- [栏位](#栏位)
-- [错误全集](#错误全集)
-- [参考](#参考)
+[toc]
 
-### 简介
-
-#### 使用方式
-##### 命令行使用  
+# 使用方式
+## 命令行使用  
 ```sh
 awk '/foo/ {print $0}' list
 ```
@@ -32,7 +26,7 @@ awk '$1 == "Feb" {sum = $2 + $3} END {print sum}' day
 84
 ```
 
-### 栏位  
+# 栏位  
 awk 会自动将每个记录分解成多个栏位.类似于字在一行里面,awk的内定动作会认为栏位之间以 whitespace 分开.  
 在 awk 中, whithspace 可以是一个或多个空白或是 tabs.  
 
@@ -41,14 +35,25 @@ This seems like a pretty nice example.
 第一个栏位($1)是 This, 第2个栏位($2)是 seems ,依次类推.    
 __注意:__ 第7个栏位($7)是 example. 
 
-### printf
+# printf
 [了解 printf](printf.md)
 
-### 错误全集
+# 错误全集
 - `-bash: gawk: command not found`  
   这里在Mac中发现的问题,主要是Mac中没有此指令,下载安装地址:
   [rudix.org gawk](http://rudix.org/packages/gawk.html)   
   [Install gawk on Mac OS X](http://macappstore.org/gawk/)
 
-### 参考
+# 参考
 [Gawk](http://linux.ximizi.com/linux/linux5458.htm)
+
+# 取值
+
+我们可以通过 `$(awk [method] [file] )` 的形式来让结果成为一个可复用的值
+
+```sh
+# 从 package.json 中获取 version 的值
+VERSION=$(awk '/version/ {print $2}' ./package.json)
+
+echo $VERSION
+```
