@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
+# 参数1 没有时报错
 NAME=${1?Error: no name given}
+# 参数2 默认为 friend
 NAME2=${2:-friend}
 
 echo "HELLO! $NAME and $NAME2"

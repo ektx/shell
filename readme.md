@@ -1,54 +1,57 @@
-# shell awk
+# Shell 基础教程
 
-### 目录
-- [简介](#简介)
-- [栏位](#栏位)
-- [错误全集](#错误全集)
-- [参考](#参考)
+[toc]
 
-### 简介
+## 查看当前系统信息
 
-#### 使用方式
-##### 命令行使用  
-```sh
-awk '/foo/ {print $0}' list
-```
-搜寻 list 里的每一行是否含有子字串 'foo'，如果含有 'foo' 则打印出来
-
-```sh
-# Get
-fooey 555-1234 2400/1200/300 B 
-foot 555-6699 1200/300 B 
-macfoo 555-6480 1200/300 A 
-sabafoo 555-2127 1200/300 C
+```bash
+uname -a
 ```
 
-```sh
-awk '$1 == "Feb" {sum = $2 + $3} END {print sum}' day
+## 文件夹访问权限
+
+```bash
+# 把 ~/iserver 权限设置为rwxrwxr-x
+chmod 775 
+
+# 把 ~/iserver及其子文件夹设置为 rwxrwxr-x
+chmod -R 755
 ```
-在文档 day 中每一行匹配的第一栏匹配是否为 Feb ,如果是的话,则把它的第3栏和第4栏想加,最终打印出来  
-```sh
-#GET
-84
+
+[Linux常用命令：chmod修改文件权限 777和754](https://blog.csdn.net/pythonw/article/details/80263428)  
+
+## 编写简单的可执行文件
+创建 helloWorld.sh 文件
+添加以下内容：
+
+```bash
+#!/bin/bash
+
+echo 'hello world'
 ```
 
-### 栏位  
-awk 会自动将每个记录分解成多个栏位.类似于字在一行里面,awk的内定动作会认为栏位之间以 whitespace 分开.  
-在 awk 中, whithspace 可以是一个或多个空白或是 tabs.  
+添加可执行权限：`chmod a+x helloWrold.sh`   
+运行：`./helloWorld.sh` 可见输出 **hello world**  
 
-This seems like a pretty nice example.  
+## 系统默认参数 
 
-第一个栏位($1)是 This, 第2个栏位($2)是 seems ,依次类推.    
-__注意:__ 第7个栏位($7)是 example. 
+- $0 当前程序名称
+- $n 当前程序的第n个参数
+- $* 当前程序的所有参数（不包括程序本身）
+- $# 当前程序的参数个数（不包括程序本身）
+- $? 命令或程序执行完成后的状态，一般返回0表示执行成功
+- $UID 当前用户的ID
+- $PWD 当前所在的目录
 
-### printf
-[了解 printf](printf.md)
+demo.sh
+```bash
+#!/bin/bash
+echo $1 $2
+```
 
-### 错误全集
-- `-bash: gawk: command not found`  
-  这里在Mac中发现的问题,主要是Mac中没有此指令,下载安装地址:
-  [rudix.org gawk](http://rudix.org/packages/gawk.html)   
-  [Install gawk on Mac OS X](http://macappstore.org/gawk/)
+运行 `./demo.sh abc 123` ,此时，会输出 ==abc 123==,这里 abc 为 `$1`, 123 为 `$2`。
 
-### 参考
-[Gawk](http://linux.ximizi.com/linux/linux5458.htm)
+
+# 参考
+[📚 Shell教程](https://www.runoob.com/linux/linux-shell.html)  
+
